@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var x =1
+        // y = 2
+        // function fn(){
+        //     console.log(x,y)
+        //     var x = y = 3
+        //     console.log(x,y)
+        // }
+        // fn()
+        // console.log(x,y)
+
+        // var x = 1
+        // y = 2
+        // z = 3
+        // // 传参现在x是2
+        // function fn(x) {
+        //     /* 
+        //     预解析：  var y
+        //      */
+        //     console.log(x, y, z)  // 2，undefined，3
+        //     x = 4
+        //     var y = 5
+        //     z = 6
+        //     console.log(x, y, z)
+        // }
+        // y = fn(y)  // 没有return，函数返回值就是undefined
+        // console.log(x, y, z)
+
+        // var x = [10,20,30,40]
+        // function fn(x){
+        //     console.log(x.join('|'))
+        //     x.push(100)
+        //     x = x.slice(2)
+        //     x.unshift(200)
+        //     console.log(x.join('&'))
+        // }
+        // fn(x)
+        // console.log(x.toString())
+
+        // var x = 5
+        // function fn(){
+        //     return function(y){
+        //         console.log(y+(++x)) // 12
+        //     }
+        // }
+        // var f =fn(6)
+        // f(7)  // 13
+        // fn(8)(9)  // 16
+        // f(10)  // 18
+        // console.log(x)  // 8
+
+        // var x= 0  // 1
+        // y=1
+        // function fn(){
+        //     x+=2
+        //     // 在第一次函数调用的时候，把一个新函数赋值给了fn，这个时候会把全局的fn变成当前这个新的函数
+        //     fn=function(y){
+        //         console.log(y+(--x))
+        //     }
+        //     console.log(x,y)
+        // }
+        // fn(3)  // 2 1 
+        // fn(4)  // 5
+        // console.log(x,y)  // 1,1
+
+        var x = 2
+        var y = {
+            x:3,
+            // 匿名函数自执行一定是window
+
+            // var x = 2
+            z:(function(x){
+                this.x*=x  // x*=2  window.x = 4
+                x+=2  //4
+                return function(n){
+                    this.x*=n  // y.x*=5  3*=5  y.x = 15
+                    // 7 父级的x变成7 --> 10
+                    x+=3
+                    console.log(x)
+                }
+            })(x)  // 2
+        }
+        var m = y.z  // return 后面的函数
+        m(4)  //7 window.x*=n --> 4*=4  x=16
+        y.z(5)  // 10
+        console.log(x,y.x)  // 16,15
+    </script>
+</body>
+
+</html>
