@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /* 
+    string.replace(''或者放正则，'替换字符'或者放函数  )  替换      过滤敏感词
+
+    函数的第一个参数就是每次匹配的字符，如果匹配多次那么会多次调用
+    打游戏的时候，急了就会喷人  #￥%
+     */
+    //  let str = '1珠288风3'
+    //  console.log(str.replace('风','峰')) // 替换文字
+    //  console.log(str.replace(/\d+/g,'22')) // 替换字符
+    // let str = '我是你的小呀小苹果'
+    // console.log(str.replace(/我是|小|苹果/g,'***'))
+    /*  
+        函数的第一个参数就是每次匹配的字符，如果匹配多次那么会多次调用
+        比如说   敏感词语用￥%&*等特殊符号代替
+    */
+
+        let str = '我靠山头有一头羊驼在吃草，卧槽'
+    console.log(str.replace(/卧槽|羊驼|我靠|草/g,
+    // $0是每次匹配到的敏感词 拿到敏感词之后要看下length。通过length去添加替换文字的个数   拿到0-替换字符串长度的数字
+    function($0){
+        // console.log($0)
+        let temp = ''
+        for (let i = 0; i < $0.length; i++) {
+            temp += '*'
+        }
+        return temp
+    }))
+    </script>
+</body>
+</html>
